@@ -11,9 +11,8 @@ import { MatTableDataSource } from '@angular/material/table';
   styleUrls: ['./app.component.css'],
 })
 export class AppComponent implements OnInit {
-  displayedColumns: string[] = ['id', 'name'];
-  pokemons: any[] = [];
-  dataSource: MatTableDataSource<any> = new MatTableDataSource(this.pokemons);
+  displayedColumns: string[] = ['url', 'name'];
+  dataSource!: MatTableDataSource<any>;
 
   @ViewChild(MatPaginator) paginator!: MatPaginator;
   @ViewChild(MatSort) sort!: MatSort;
@@ -29,26 +28,18 @@ export class AppComponent implements OnInit {
   }
 
   getPokemonList() {
-    let pokemonData;
-    for (let i = 1; i <= 1292; i++) {
-      this._pkmService.getPokemonList(i).subscribe({
-        next: (res) => {
-          //this.dataSource = new MatTableDataSource(res.results); //res._data._value.results
-          pokemonData = {
-            id: i,
-            name: res.name,
-          };
-          this.pokemons.push(pokemonData);
-          this.dataSource = new MatTableDataSource<any>(this.pokemons);
-          this.dataSource.paginator = this.paginator;
-          this.dataSource.sort = this.sort;
-        },
-
-        error: (err) => {
-          console.log(err);
-        },
-      });
-    }
+    this._pkmService.getPokemonList().subscribe({
+      next: (res) => {
+        this.dataSource = new MatTableDataSource(res.results); //res._data._value.results
+        console.log('---------datasource-------');
+        console.log(this.dataSource);
+        this.dataSource.sort = this.sort;
+        this.dataSource.paginator = this.paginator;
+      },
+      error: (err) => {
+        console.log(err);
+      },
+    });
   }
 
   applyFilter(event: Event) {

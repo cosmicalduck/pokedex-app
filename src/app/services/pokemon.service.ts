@@ -8,7 +8,9 @@ import { Observable } from 'rxjs';
 export class PokemonService {
   constructor(private _http: HttpClient) {}
 
-  getPokemonList(index: number): Observable<any> {
-    return this._http.get(`https://pokeapi.co/api/v2/pokemon/${index}`);
+  getPokemonList(): Observable<any> {
+    return this._http.get(
+      'https://pokeapi.co/api/v2/pokemon?limit=100000&offset=0'
+    );
   }
 }
