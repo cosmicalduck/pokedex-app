@@ -13,4 +13,8 @@ export class PokemonService {
       'https://pokeapi.co/api/v2/pokemon?limit=100000&offset=0'
     );
   }
+
+  getPokemon(name: string): Observable<any> {
+    return this._http.get(`https://pokeapi.co/api/v2/pokemon/${name}`);
+  }
 }
