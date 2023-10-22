@@ -1,23 +1,53 @@
 <mat-card class="example-card">
   <mat-card-header>
     <div mat-card-avatar class="example-header-image"></div>
-    <mat-card-title>Shiba Inu</mat-card-title>
-    <mat-card-subtitle>Dog Breed</mat-card-subtitle>
+    <mat-card-title>{{ name }}</mat-card-title>
+    <mat-card-subtitle>
+      <mat-chip-set>
+        <mat-chip class="{{ pokemonDetail.types[0].type.name }}">
+          {{ pokemonDetail.types[0].type.name }}
+        </mat-chip>
+        <mat-chip
+          *ngIf="hasSecondType"
+          class="{{ pokemonDetail.types[1].type.name }}"
+        >
+          {{ pokemonDetail.types[1].type.name }}
+        </mat-chip>
+      </mat-chip-set>
+    </mat-card-subtitle>
   </mat-card-header>
-  <img
-    mat-card-image
-    src="https://material.angular.io/assets/img/examples/shiba2.jpg"
-    alt="Photo of a Shiba Inu"
-  />
+  <div class="center">
+    <img
+      mat-card-image
+      src="{{ pokemonDetail.sprites.front_default }}"
+      alt="Front view of {{ name }}"
+      height="96px"
+      width="96px"
+    />
+  </div>
+
   <mat-card-content>
-    <p>
-      The Shiba Inu is the smallest of the six original and distinct spitz
-      breeds of dog from Japan. A small, agile dog that copes very well with
-      mountainous terrain, the Shiba Inu was originally bred for hunting.
-    </p>
+    <table>
+      <tr>
+        <th>Height</th>
+        <th>Weight</th>
+      </tr>
+      <tr>
+        <td>{{ pokemonDetail.height }}</td>
+        <td>{{ pokemonDetail.weight }}</td>
+      </tr>
+    </table>
+    <table>
+      <tr>
+        <th colspan="2">Abilities</th>
+      </tr>
+      <tr>
+        <td>{{ pokemonDetail.abilities[0].ability.name }}</td>
+        <td>
+          {{ pokemonDetail.abilities[1].ability.name }}
+          <small>Hidden Ability</small>
+        </td>
+      </tr>
+    </table>
   </mat-card-content>
-  <mat-card-actions>
-    <button mat-button>LIKE</button>
-    <button mat-button>SHARE</button>
-  </mat-card-actions>
 </mat-card>

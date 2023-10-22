@@ -1,6 +1,11 @@
 <app-header></app-header>
 <br />
 <div class="main-div">
-  <app-pokemon-list></app-pokemon-list>
-  <app-pokemon-detail></app-pokemon-detail>
+  <app-pokemon-list
+    (clickPokemonEvent)="getPokemonName($event)"
+  ></app-pokemon-list>
+  <app-pokemon-detail
+    *ngIf="showDetails"
+    [name]="pokemonName"
+  ></app-pokemon-detail>
 </div>

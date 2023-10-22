@@ -9,6 +9,7 @@ import { MatPaginatorModule } from '@angular/material/paginator';
 import { MatInputModule } from '@angular/material/input';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatSortModule } from '@angular/material/sort';
+import { MatChipsModule } from '@angular/material/chips';
 
 @NgModule({
   imports: [
@@ -22,6 +23,7 @@ import { MatSortModule } from '@angular/material/sort';
     MatInputModule,
     MatFormFieldModule,
     MatSortModule,
+    MatChipsModule,
   ],
   exports: [
     MatToolbarModule,
@@ -34,6 +36,7 @@ import { MatSortModule } from '@angular/material/sort';
     MatInputModule,
     MatFormFieldModule,
     MatSortModule,
+    MatChipsModule,
   ],
 })
 export class MaterialModule {}

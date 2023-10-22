@@ -1,4 +1,10 @@
-import { Component, OnInit, ViewChild } from '@angular/core';
+import {
+  Component,
+  OnInit,
+  ViewChild,
+  Output,
+  EventEmitter,
+} from '@angular/core';
 import { PokemonService } from 'src/app/services/pokemon.service';
 import { MatSort } from '@angular/material/sort';
 import { MatPaginator } from '@angular/material/paginator';
@@ -12,6 +18,8 @@ import { MatTableDataSource } from '@angular/material/table';
 export class PokemonListComponent implements OnInit {
   displayedColumns: string[] = ['url', 'name'];
   dataSource!: MatTableDataSource<any>;
+  @Output() clickPokemonEvent = new EventEmitter<string>();
+  pokemonName!: string;
 
   @ViewChild(MatPaginator) paginator!: MatPaginator;
   @ViewChild(MatSort) sort!: MatSort;
@@ -46,6 +54,7 @@ export class PokemonListComponent implements OnInit {
   }
 
   getRowPokemon(row: { name: string; url: string }) {
-    console.log(row);
+    this.pokemonName = row.name;
+    this.clickPokemonEvent.emit(row.name);
   }
 }
