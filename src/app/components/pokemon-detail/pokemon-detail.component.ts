@@ -17,7 +17,7 @@ import { PokemonDetail } from 'src/app/interfaces/pokemon-detail';
   styleUrls: ['./pokemon-detail.component.css'],
 })
 export class PokemonDetailComponent implements OnInit, OnChanges {
-  // @ViewChild('button') button: ElementRef;
+  @ViewChild('button') button!: ElementRef;
   @Input() name!: string;
   pokemonDetail!: PokemonDetail;
   hasSecondType: boolean = false;
@@ -62,7 +62,12 @@ export class PokemonDetailComponent implements OnInit, OnChanges {
   }
 
   markAsFavoritePokemon(name: string) {
+    this.markedAsFavorie();
     this.favoritePokemon.emit(name);
     alert(`${name} ha sido guardado como tu pokémon favorito.`);
+  }
+
+  markedAsFavorie() {
+    (<any>this.button).color = 'primary';
   }
 }

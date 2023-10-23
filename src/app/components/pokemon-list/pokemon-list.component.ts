@@ -9,6 +9,13 @@ import { PokemonService } from 'src/app/services/pokemon.service';
 import { MatSort } from '@angular/material/sort';
 import { MatPaginator } from '@angular/material/paginator';
 import { MatTableDataSource } from '@angular/material/table';
+import { Store } from '@ngrx/store';
+import {
+  loadPokemons,
+  loadedPokemons,
+} from 'src/app/state/actions/pokemon.actions';
+import { Observable } from 'rxjs';
+import { selectPokemonLoading } from 'src/app/state/selectors/pokemon.selector';
 
 @Component({
   selector: 'app-pokemon-list',
@@ -21,20 +28,24 @@ export class PokemonListComponent implements OnInit {
   @Output() clickPokemonEvent = new EventEmitter<string>();
   pokemonName!: string;
 
+  loading$: Observable<boolean> = new Observable();
+
   @ViewChild(MatPaginator) paginator!: MatPaginator;
   @ViewChild(MatSort) sort!: MatSort;
 
-  constructor(private _pkmService: PokemonService) {}
+  constructor(private _pkmService: PokemonService, private store: Store<any>) {}
 
   ngOnInit(): void {
+    this.loading$ = this.store.select(selectPokemonLoading);
+    this.store.dispatch(loadPokemons());
     this.getPokemonList();
-    console.log(this.dataSource);
   }
 
   getPokemonList() {
     this._pkmService.getPokemonList().subscribe({
       next: (res) => {
-        this.dataSource = new MatTableDataSource(res); //res._data._value.results
+        this.store.dispatch(loadedPokemons({ pokemonList: res }));
+        this.dataSource = new MatTableDataSource(res);
         this.dataSource.sort = this.sort;
         this.dataSource.paginator = this.paginator;
       },
