@@ -1,5 +1,6 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
+import { APIResponse } from '../interfaces/api-response';
 import { Observable } from 'rxjs';
 
 @Injectable({
@@ -8,8 +9,8 @@ import { Observable } from 'rxjs';
 export class PokemonService {
   constructor(private _http: HttpClient) {}
 
-  getPokemonList(): Observable<any> {
-    return this._http.get(
+  getPokemonList(): Observable<APIResponse> {
+    return this._http.get<APIResponse>(
       'https://pokeapi.co/api/v2/pokemon?limit=100000&offset=0'
     );
   }
