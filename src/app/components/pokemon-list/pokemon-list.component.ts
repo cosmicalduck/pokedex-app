@@ -34,7 +34,7 @@ export class PokemonListComponent implements OnInit {
   getPokemonList() {
     this._pkmService.getPokemonList().subscribe({
       next: (res) => {
-        this.dataSource = new MatTableDataSource(res.results); //res._data._value.results
+        this.dataSource = new MatTableDataSource(res); //res._data._value.results
         this.dataSource.sort = this.sort;
         this.dataSource.paginator = this.paginator;
       },

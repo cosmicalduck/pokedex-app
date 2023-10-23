@@ -20,6 +20,7 @@ export class PokemonDetailComponent implements OnInit, OnChanges {
   hasSecondType: boolean = false;
   favoritePkmName!: string;
   @Output() favoritePokemon = new EventEmitter<string>();
+  loadCompleted: boolean = false;
 
   constructor(private _pkmService: PokemonService) {}
 
@@ -30,14 +31,16 @@ export class PokemonDetailComponent implements OnInit, OnChanges {
 
   ngOnChanges(): void {
     this.hasSecondType = false;
-
-    this.getPokemonDetails(this.name);
+    if (this.pokemonDetail !== undefined) {
+      if (this.name !== this.pokemonDetail.name) {
+        this.getPokemonDetails(this.name);
+      }
+    }
   }
 
   getPokemonDetails(name: string) {
     this._pkmService.getPokemon(name).subscribe({
       next: (res) => {
-        console.log(res);
         this.pokemonDetail = res;
         if (
           this.pokemonDetail.types[1] !== null &&
@@ -48,6 +51,9 @@ export class PokemonDetailComponent implements OnInit, OnChanges {
       },
       error: (err) => {
         console.log(err);
+      },
+      complete: () => {
+        this.loadCompleted = true;
       },
     });
   }

@@ -10,6 +10,7 @@ import { MatInputModule } from '@angular/material/input';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatSortModule } from '@angular/material/sort';
 import { MatChipsModule } from '@angular/material/chips';
+import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 
 @NgModule({
   imports: [
@@ -24,6 +25,7 @@ import { MatChipsModule } from '@angular/material/chips';
     MatFormFieldModule,
     MatSortModule,
     MatChipsModule,
+    MatProgressSpinnerModule,
   ],
   exports: [
     MatToolbarModule,
@@ -37,6 +39,7 @@ import { MatChipsModule } from '@angular/material/chips';
     MatFormFieldModule,
     MatSortModule,
     MatChipsModule,
+    MatProgressSpinnerModule,
   ],
 })
 export class MaterialModule {}

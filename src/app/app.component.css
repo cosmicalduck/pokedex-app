@@ -1,4 +1,13 @@
 .main-div {
   display: flex;
-  justify-content: space-evenly;
+  justify-content: space-between;
+}
+
+.left-padding {
+  padding-left: 60px;
+}
+
+.right-padding {
+  padding-right: 60px;
+  padding-top: 78px;
 }

@@ -1,10 +1,12 @@
-<app-header></app-header>
+<app-header [favPokemonName]="favoritePokemon"></app-header>
 <br />
 <div class="main-div">
   <app-pokemon-list
+    class="left-padding"
     (clickPokemonEvent)="getPokemonName($event)"
   ></app-pokemon-list>
   <app-pokemon-detail
+    class="right-padding"
     *ngIf="showDetails"
     [name]="pokemonName"
     (favoritePokemon)="getFavoritePokemon($event)"

@@ -1,6 +1,6 @@
-import { Component, Input, OnInit } from '@angular/core';
-import { PokemonService } from 'src/app/services/pokemon.service';
-import { MatDialogRef } from '@angular/material/dialog';
+import { Component, Inject, OnInit } from '@angular/core';
+import { MAT_DIALOG_DATA } from '@angular/material/dialog';
+import { DialogData } from 'src/app/interfaces/dialog-data';
 
 @Component({
   selector: 'app-favorite-pokemon',
@@ -8,14 +8,10 @@ import { MatDialogRef } from '@angular/material/dialog';
   styleUrls: ['./favorite-pokemon.component.css'],
 })
 export class FavoritePokemonComponent implements OnInit {
-  @Input() favoritePkmName!: string;
-
-  constructor(
-    private _pkmService: PokemonService,
-    private dialogRef: MatDialogRef<FavoritePokemonComponent>
-  ) {}
+  favoritePokemonName!: string;
+  constructor(@Inject(MAT_DIALOG_DATA) public pkmData: DialogData) {}
 
   ngOnInit(): void {
-    this._pkmService.getPokemon(this.favoritePkmName);
+    this.favoritePokemonName = this.pkmData.favoritePokemonName;
   }
 }
