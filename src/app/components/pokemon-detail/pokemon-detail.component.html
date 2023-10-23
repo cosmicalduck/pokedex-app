@@ -19,14 +19,14 @@
     <img
       mat-card-image
       src="{{ pokemonDetail.sprites.front_default }}"
-      alt="Front view of {{ name }}"
+      alt="Vista de frente de {{ name }}"
       height="96px"
       width="96px"
     />
     <img
       mat-card-image
       src="{{ pokemonDetail.sprites.back_default }}"
-      alt="Back view of {{ name }}"
+      alt="Vista de atrás de {{ name }}"
       height="96px"
       width="96px"
     />
@@ -34,32 +34,33 @@
 
   <mat-card-content>
     <button
+      #button
       mat-icon-button
       color="accent"
-      aria-label="Mark as favorite pokemon"
+      aria-label="Escoger como pokémon favorito"
       (click)="markAsFavoritePokemon(name)"
     >
       <mat-icon>favorite</mat-icon>
     </button>
     <table>
       <tr>
-        <th>Height</th>
-        <th>Weight</th>
+        <th>Altura</th>
+        <th>Peso</th>
       </tr>
       <tr>
-        <td>{{ pokemonDetail.height }}</td>
-        <td>{{ pokemonDetail.weight }}</td>
+        <td>"{{ pokemonDetail.height / 10 }}" m.</td>
+        <td>"{{ pokemonDetail.weight / 10 }}" kg.</td>
       </tr>
     </table>
     <table>
       <tr>
-        <th colspan="2">Abilities</th>
+        <th colspan="2">Habilidades</th>
       </tr>
       <tr>
         <td>{{ pokemonDetail.abilities[0].ability.name | titlecase }}</td>
         <td>
           {{ pokemonDetail.abilities[1].ability.name | titlecase }}
-          <small>Hidden Ability</small>
+          <small>Habilidad oculta</small>
         </td>
       </tr>
     </table>

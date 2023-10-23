@@ -5,6 +5,8 @@ import {
   OnChanges,
   Output,
   EventEmitter,
+  ViewChild,
+  ElementRef,
 } from '@angular/core';
 import { PokemonService } from 'src/app/services/pokemon.service';
 import { PokemonDetail } from 'src/app/interfaces/pokemon-detail';
@@ -15,6 +17,7 @@ import { PokemonDetail } from 'src/app/interfaces/pokemon-detail';
   styleUrls: ['./pokemon-detail.component.css'],
 })
 export class PokemonDetailComponent implements OnInit, OnChanges {
+  // @ViewChild('button') button: ElementRef;
   @Input() name!: string;
   pokemonDetail!: PokemonDetail;
   hasSecondType: boolean = false;
