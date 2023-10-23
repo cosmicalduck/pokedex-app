@@ -1,4 +1,11 @@
-import { Component, OnInit, Input, OnChanges } from '@angular/core';
+import {
+  Component,
+  OnInit,
+  Input,
+  OnChanges,
+  Output,
+  EventEmitter,
+} from '@angular/core';
 import { PokemonService } from 'src/app/services/pokemon.service';
 import { PokemonDetail } from 'src/app/interfaces/pokemon-detail';
 
@@ -11,6 +18,8 @@ export class PokemonDetailComponent implements OnInit, OnChanges {
   @Input() name!: string;
   pokemonDetail!: PokemonDetail;
   hasSecondType: boolean = false;
+  favoritePkmName!: string;
+  @Output() favoritePokemon = new EventEmitter<string>();
 
   constructor(private _pkmService: PokemonService) {}
 
@@ -41,5 +50,10 @@ export class PokemonDetailComponent implements OnInit, OnChanges {
         console.log(err);
       },
     });
+  }
+
+  markAsFavoritePokemon(name: string) {
+    this.favoritePokemon.emit(name);
+    alert(`${name} ha sido guardado como tu pokémon favorito.`);
   }
 }

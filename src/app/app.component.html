@@ -7,5 +7,6 @@
   <app-pokemon-detail
     *ngIf="showDetails"
     [name]="pokemonName"
+    (favoritePokemon)="getFavoritePokemon($event)"
   ></app-pokemon-detail>
 </div>

@@ -1,17 +1,16 @@
 <mat-card class="example-card">
   <mat-card-header>
-    <div mat-card-avatar class="example-header-image"></div>
-    <mat-card-title>{{ name }}</mat-card-title>
+    <mat-card-title>{{ name | titlecase }}</mat-card-title>
     <mat-card-subtitle>
       <mat-chip-set>
         <mat-chip class="{{ pokemonDetail.types[0].type.name }}">
-          {{ pokemonDetail.types[0].type.name }}
+          {{ pokemonDetail.types[0].type.name | titlecase }}
         </mat-chip>
         <mat-chip
           *ngIf="hasSecondType"
           class="{{ pokemonDetail.types[1].type.name }}"
         >
-          {{ pokemonDetail.types[1].type.name }}
+          {{ pokemonDetail.types[1].type.name | titlecase }}
         </mat-chip>
       </mat-chip-set>
     </mat-card-subtitle>
@@ -24,9 +23,24 @@
       height="96px"
       width="96px"
     />
+    <img
+      mat-card-image
+      src="{{ pokemonDetail.sprites.back_default }}"
+      alt="Back view of {{ name }}"
+      height="96px"
+      width="96px"
+    />
   </div>
 
   <mat-card-content>
+    <button
+      mat-icon-button
+      color="accent"
+      aria-label="Mark as favorite pokemon"
+      (click)="markAsFavoritePokemon(name)"
+    >
+      <mat-icon>favorite</mat-icon>
+    </button>
     <table>
       <tr>
         <th>Height</th>
@@ -42,9 +56,9 @@
         <th colspan="2">Abilities</th>
       </tr>
       <tr>
-        <td>{{ pokemonDetail.abilities[0].ability.name }}</td>
+        <td>{{ pokemonDetail.abilities[0].ability.name | titlecase }}</td>
         <td>
-          {{ pokemonDetail.abilities[1].ability.name }}
+          {{ pokemonDetail.abilities[1].ability.name | titlecase }}
           <small>Hidden Ability</small>
         </td>
       </tr>

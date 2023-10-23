@@ -7,11 +7,16 @@ import { Component } from '@angular/core';
 })
 export class AppComponent {
   pokemonName!: string;
+  favoritePokemon!: string;
   showDetails: boolean = false;
   constructor() {}
 
   getPokemonName(pkmName: string) {
     this.pokemonName = pkmName;
     this.showDetails = true;
+  }
+
+  getFavoritePokemon(pkmName: string) {
+    this.favoritePokemon = pkmName;
   }
 }
