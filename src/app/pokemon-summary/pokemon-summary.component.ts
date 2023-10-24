@@ -13,18 +13,20 @@ import { Result } from '../interfaces/api-response';
 export class PokemonSummaryComponent implements OnInit {
   letters: string[] = [...'abcdefghijklmnopqrstuvwxyz'];
   pokemonList$: Observable<Result[]> = new Observable();
+  pokemonArray!: Result[];
 
   constructor(private store: Store<AppState>) {}
 
   ngOnInit(): void {
     this.pokemonList$ = this.store.select(selectPokemonList);
+    this.pokemonList$.subscribe((pokemons) => {
+      this.pokemonArray = pokemons;
+    });
   }
 
   getPokemonsByLetter(letter: string) {
-    return this.pokemonList$.pipe(
-      map((pokemon) => {
-        pokemon.filter((pokemon) => pokemon.name.startsWith(letter));
-      })
+    return this.pokemonArray.filter((pokemon) =>
+      pokemon.name.startsWith(letter)
     );
     // return this.pokemonList$.pipe(map(pokemon => {pokemon.filter(pokemon.name.)}))
 

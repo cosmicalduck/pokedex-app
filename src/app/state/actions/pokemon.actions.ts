@@ -8,6 +8,15 @@ export const loadedPokemons = createAction(
   props<{ pokemonList: Result[] }>()
 );
 
+export const loadFavoritePokemon = createAction(
+  '[Favorite Pokemon] Load favorite pokemon'
+);
+
+export const loadedFavoritePokemon = createAction(
+  '[Favorite Pokemon] Loaded successfully',
+  props<{ favoritePokemon: string }>()
+);
+
 export const setFavoritePokemon = createAction(
   '[Pokemon Detail] Set successfully',
   props<{ favoritePokemon: string }>()

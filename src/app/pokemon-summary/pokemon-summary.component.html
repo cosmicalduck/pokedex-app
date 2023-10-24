@@ -6,10 +6,12 @@
           Pokémons que empiezan con "{{ letter | uppercase }}"
         </mat-panel-title>
         <mat-panel-description>
-          This is a summary of the content
+          {{ getPokemonsByLetter(letter).length }}
         </mat-panel-description>
       </mat-expansion-panel-header>
-      <p>This is the primary content of the panel.</p>
+      <div *ngFor="let pokemon of getPokemonsByLetter(letter)">
+        <p>{{ pokemon.name | titlecase }}</p>
+      </div>
     </mat-expansion-panel>
   </mat-accordion>
 </div>

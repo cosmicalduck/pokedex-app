@@ -1,5 +1,11 @@
 import { createReducer, on } from '@ngrx/store';
-import { loadPokemons, loadedPokemons } from '../actions/pokemon.actions';
+import {
+  loadFavoritePokemon,
+  loadPokemons,
+  loadedFavoritePokemon,
+  loadedPokemons,
+  setFavoritePokemon,
+} from '../actions/pokemon.actions';
 // import { increment, decrement, reset } from './counter.actions';
 import { PokemonState } from 'src/app/interfaces/pokemon.state';
 
@@ -14,7 +20,24 @@ export const pokemonReducer = createReducer(
   on(loadPokemons, (state) => {
     return { ...state, loading: true };
   }),
-  on(loadedPokemons, (state, { pokemonList }) => {
-    return { ...state, loading: false, pokemonList };
+  on(loadedPokemons, (state, action) => {
+    return { ...state, loading: false, pokemonList: action.pokemonList };
+  }),
+  on(loadFavoritePokemon, (state) => {
+    return { ...state, loading: true };
+  }),
+  on(loadedFavoritePokemon, (state, action) => {
+    return {
+      ...state,
+      loading: false,
+      favoritePokemon: action.favoritePokemon,
+    };
+  }),
+  on(setFavoritePokemon, (state, action) => {
+    return {
+      ...state,
+      loading: false,
+      favoritePokemon: action.favoritePokemon,
+    };
   })
 );

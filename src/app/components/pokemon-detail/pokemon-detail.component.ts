@@ -10,6 +10,7 @@ import {
 } from '@angular/core';
 import { PokemonService } from 'src/app/services/pokemon.service';
 import { PokemonDetail } from 'src/app/interfaces/pokemon-detail';
+import { FavoritePokemonService } from 'src/app/services/favorite-pokemon.service';
 
 @Component({
   selector: 'app-pokemon-detail',
@@ -25,7 +26,10 @@ export class PokemonDetailComponent implements OnInit, OnChanges {
   @Output() favoritePokemon = new EventEmitter<string>();
   loadCompleted: boolean = false;
 
-  constructor(private _pkmService: PokemonService) {}
+  constructor(
+    private _pkmService: PokemonService,
+    private _favPkmService: FavoritePokemonService
+  ) {}
 
   ngOnInit(): void {
     this.hasSecondType = false;
@@ -64,7 +68,12 @@ export class PokemonDetailComponent implements OnInit, OnChanges {
   markAsFavoritePokemon(name: string) {
     this.markedAsFavorie();
     this.favoritePokemon.emit(name);
-    alert(`${name} ha sido guardado como tu pokémon favorito.`);
+    this._favPkmService
+      .postFavoritePokemon({ favoritePokemonName: name })
+      .subscribe({
+        next: () => alert(`${name} ha sido guardado como tu pokémon favorito.`),
+        error: () => alert('No se ha podido completar la acción'),
+      });
   }
 
   markedAsFavorie() {

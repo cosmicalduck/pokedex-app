@@ -14,8 +14,12 @@ import {
   loadPokemons,
   loadedPokemons,
 } from 'src/app/state/actions/pokemon.actions';
-import { Observable } from 'rxjs';
-import { selectPokemonLoading } from 'src/app/state/selectors/pokemon.selector';
+import { Observable, map } from 'rxjs';
+import {
+  selectPokemonList,
+  selectPokemonLoading,
+} from 'src/app/state/selectors/pokemon.selector';
+import { Result } from 'src/app/interfaces/api-response';
 
 @Component({
   selector: 'app-pokemon-list',
@@ -24,10 +28,11 @@ import { selectPokemonLoading } from 'src/app/state/selectors/pokemon.selector';
 })
 export class PokemonListComponent implements OnInit {
   displayedColumns: string[] = ['url', 'name'];
-  dataSource!: MatTableDataSource<any>;
+  dataSource!: MatTableDataSource<Result>;
   @Output() clickPokemonEvent = new EventEmitter<string>();
   pokemonName!: string;
 
+  pokemonList$: Observable<Result[]> = new Observable();
   loading$: Observable<boolean> = new Observable();
 
   @ViewChild(MatPaginator) paginator!: MatPaginator;
@@ -37,21 +42,11 @@ export class PokemonListComponent implements OnInit {
 
   ngOnInit(): void {
     this.loading$ = this.store.select(selectPokemonLoading);
-    this.store.dispatch(loadPokemons());
-    this.getPokemonList();
-  }
-
-  getPokemonList() {
-    this._pkmService.getPokemonList().subscribe({
-      next: (res) => {
-        this.store.dispatch(loadedPokemons({ pokemonList: res }));
-        this.dataSource = new MatTableDataSource(res);
-        this.dataSource.sort = this.sort;
-        this.dataSource.paginator = this.paginator;
-      },
-      error: (err) => {
-        console.log(err);
-      },
+    this.pokemonList$ = this.store.select(selectPokemonList);
+    this.pokemonList$.subscribe((pokemonList) => {
+      this.dataSource = new MatTableDataSource(pokemonList);
+      this.dataSource.sort = this.sort;
+      this.dataSource.paginator = this.paginator;
     });
   }
 

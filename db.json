@@ -1,3 +1,5 @@
 {
-  "favoritePokemon": {}
+  "favoritePokemon": {
+    "favoritePokemonName": "charmander"
+  }
 }

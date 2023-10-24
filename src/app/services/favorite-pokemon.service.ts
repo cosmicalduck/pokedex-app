@@ -1,5 +1,6 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
+import { Observable, map } from 'rxjs';
 
 @Injectable({
   providedIn: 'root',
@@ -9,11 +10,15 @@ export class FavoritePokemonService {
 
   constructor(private _http: HttpClient) {}
 
-  getFavoritePokemon() {
-    return this._http.get(this.url);
+  getFavoritePokemon(): Observable<string> {
+    return this._http.get<{ favoritePokemonName: string }>(this.url).pipe(
+      map((response) => {
+        return response.favoritePokemonName;
+      })
+    );
   }
 
-  postFavoritePokemon(data: any) {
+  postFavoritePokemon(data: { favoritePokemonName: string }) {
     return this._http.post(this.url, data);
   }
 }
