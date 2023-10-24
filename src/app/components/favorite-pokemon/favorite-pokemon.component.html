@@ -2,9 +2,12 @@
 <div mat-dialog-content>
   <app-pokemon-detail
     class="pokemon-card"
-    *ngIf="favoritePokemonName !== undefined"
-    [name]="favoritePokemonName"
+    *ngIf="stringFavPkmName !== undefined || stringFavPkmName !== ''"
+    [name]="stringFavPkmName"
   ></app-pokemon-detail>
+  <p *ngIf="stringFavPkmName === undefined || stringFavPkmName === ''">
+    No hay un pokémon guardado como favorito
+  </p>
 </div>
 <div mat-dialog-actions [align]="'end'">
   <button mat-raised-button color="accent" mat-dialog-close>Cerrar</button>

@@ -1,6 +1,8 @@
-import { Component, Inject, OnInit } from '@angular/core';
-import { MAT_DIALOG_DATA } from '@angular/material/dialog';
-import { DialogData } from 'src/app/interfaces/dialog-data';
+import { Component, OnInit } from '@angular/core';
+import { Observable } from 'rxjs';
+import { Store } from '@ngrx/store';
+import { selectFavoritePokemon } from 'src/app/state/selectors/pokemon.selector';
+import { AppState } from 'src/app/state/app.state';
 
 @Component({
   selector: 'app-favorite-pokemon',
@@ -8,10 +10,15 @@ import { DialogData } from 'src/app/interfaces/dialog-data';
   styleUrls: ['./favorite-pokemon.component.css'],
 })
 export class FavoritePokemonComponent implements OnInit {
-  favoritePokemonName!: string;
-  constructor(@Inject(MAT_DIALOG_DATA) public pkmData: DialogData) {}
+  favoritePkmName$: Observable<string> = new Observable();
+  stringFavPkmName!: string;
+
+  constructor(private store: Store<AppState>) {}
 
   ngOnInit(): void {
-    this.favoritePokemonName = this.pkmData.favoritePokemonName;
+    this.favoritePkmName$ = this.store.select(selectFavoritePokemon);
+    this.favoritePkmName$.subscribe((pokemonName) => {
+      this.stringFavPkmName = pokemonName;
+    });
   }
 }

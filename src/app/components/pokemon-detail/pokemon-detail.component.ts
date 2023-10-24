@@ -3,37 +3,56 @@ import {
   OnInit,
   Input,
   OnChanges,
-  Output,
-  EventEmitter,
   ViewChild,
   ElementRef,
+  OnDestroy,
 } from '@angular/core';
 import { PokemonService } from 'src/app/services/pokemon.service';
 import { PokemonDetail } from 'src/app/interfaces/pokemon-detail';
 import { FavoritePokemonService } from 'src/app/services/favorite-pokemon.service';
+import { Store } from '@ngrx/store';
+import { Observable, Subscription } from 'rxjs';
+import { AppState } from 'src/app/state/app.state';
+import { selectFavoritePokemon } from 'src/app/state/selectors/pokemon.selector';
 
 @Component({
   selector: 'app-pokemon-detail',
   templateUrl: './pokemon-detail.component.html',
   styleUrls: ['./pokemon-detail.component.css'],
 })
-export class PokemonDetailComponent implements OnInit, OnChanges {
+export class PokemonDetailComponent implements OnInit, OnChanges, OnDestroy {
   @ViewChild('button') button!: ElementRef;
   @Input() name!: string;
   pokemonDetail!: PokemonDetail;
+  favPkmName$: Observable<string> = new Observable();
+  favPkmNameString!: string;
+  favPkmSubscription!: Subscription;
   hasSecondType: boolean = false;
-  favoritePkmName!: string;
-  @Output() favoritePokemon = new EventEmitter<string>();
   loadCompleted: boolean = false;
 
   constructor(
     private _pkmService: PokemonService,
-    private _favPkmService: FavoritePokemonService
+    private _favPkmService: FavoritePokemonService,
+    private store: Store<AppState>
   ) {}
 
   ngOnInit(): void {
     this.hasSecondType = false;
     this.getPokemonDetails(this.name);
+    if (
+      this.favPkmNameString === null ||
+      this.favPkmNameString === '' ||
+      this.favPkmNameString === undefined
+    ) {
+      this.favPkmName$ = this.store.select(selectFavoritePokemon);
+      this.favPkmSubscription = this.favPkmName$.subscribe((name) => {
+        this.favPkmNameString = name;
+      });
+    }
+  }
+
+  ngOnDestroy(): void {
+    this.favPkmSubscription.unsubscribe();
   }
 
   ngOnChanges(): void {
@@ -50,7 +69,7 @@ export class PokemonDetailComponent implements OnInit, OnChanges {
       next: (res) => {
         this.pokemonDetail = res;
         if (
-          this.pokemonDetail.types[1] !== null &&
+          this.pokemonDetail.types[1] !== null ||
           this.pokemonDetail.types[1] !== undefined
         ) {
           this.hasSecondType = true;
@@ -67,7 +86,6 @@ export class PokemonDetailComponent implements OnInit, OnChanges {
 
   markAsFavoritePokemon(name: string) {
     this.markedAsFavorie();
-    this.favoritePokemon.emit(name);
     this._favPkmService
       .postFavoritePokemon({ favoritePokemonName: name })
       .subscribe({
@@ -77,6 +95,7 @@ export class PokemonDetailComponent implements OnInit, OnChanges {
   }
 
   markedAsFavorie() {
-    (<any>this.button).color = 'primary';
+    (<any>this.button).class = 'isFavorite';
+    (<any>this.button).color = 'accent';
   }
 }

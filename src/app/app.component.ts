@@ -1,7 +1,10 @@
 import { Component, OnInit } from '@angular/core';
 import { Store } from '@ngrx/store';
 import { AppState } from './state/app.state';
-import { loadPokemons } from './state/actions/pokemon.actions';
+import {
+  loadFavoritePokemon,
+  loadPokemons,
+} from './state/actions/pokemon.actions';
 
 @Component({
   selector: 'app-root',
@@ -17,14 +20,11 @@ export class AppComponent implements OnInit {
 
   ngOnInit(): void {
     this.store.dispatch(loadPokemons());
+    this.store.dispatch(loadFavoritePokemon());
   }
 
   getPokemonName(pkmName: string) {
     this.pokemonName = pkmName;
     this.showDetails = true;
-  }
-
-  getFavoritePokemon(pkmName: string) {
-    this.favoritePokemon = pkmName;
   }
 }

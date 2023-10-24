@@ -1,9 +1,39 @@
 .example-card {
-  max-width: 400px;
+  max-width: 500px;
+  min-width: 300px;
+}
+
+.div-card-header {
+  justify-content: center;
+}
+
+.div-table {
+  display: flex;
+  justify-content: center;
 }
 
 .center {
   text-align: center;
+}
+
+.button-div {
+  text-align: end;
+  margin-top: -15px;
+}
+
+table,
+td,
+th {
+  width: 150px;
+  text-align: center;
+}
+
+.isFavorite {
+  color: #ff4081 !important;
+}
+
+.material-icons {
+  color: darkgray;
 }
 
 .normal {

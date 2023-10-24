@@ -1,3 +1,15 @@
-.accordion {
+/* .accordion {
   width: 70%;
+} */
+
+.summary-div {
+  width: 600px;
+}
+
+/* .mat-expansion-panel-header-title {
+  width: 300px !important;
+} */
+
+mat-panel-title {
+  width: 300px !important;
 }

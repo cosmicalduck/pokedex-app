@@ -1,6 +1,8 @@
 <mat-card class="example-card" *ngIf="loadCompleted">
-  <mat-card-header>
-    <mat-card-title>{{ name | titlecase }}</mat-card-title>
+  <mat-card-header class="div-card-header">
+    <mat-card-title
+      >#{{ pokemonDetail.id }} {{ name | titlecase }}</mat-card-title
+    >
     <mat-card-subtitle>
       <mat-chip-set>
         <mat-chip class="{{ pokemonDetail.types[0].type.name }}">
@@ -18,6 +20,7 @@
   <div class="center">
     <img
       mat-card-image
+      *ngIf="pokemonDetail.sprites.front_default !== null"
       src="{{ pokemonDetail.sprites.front_default }}"
       alt="Vista de frente de {{ name }}"
       height="96px"
@@ -25,6 +28,7 @@
     />
     <img
       mat-card-image
+      *ngIf="pokemonDetail.sprites.back_default !== null"
       src="{{ pokemonDetail.sprites.back_default }}"
       alt="Vista de atrás de {{ name }}"
       height="96px"
@@ -33,37 +37,53 @@
   </div>
 
   <mat-card-content>
-    <button
-      mat-icon-button
-      color="accent"
-      aria-label="Escoger como pokémon favorito"
-      (click)="markAsFavoritePokemon(name)"
-      #button
+    <div class="button-div">
+      <button
+        mat-icon-button
+        class="fav-button"
+        aria-label="Escoger como pokémon favorito"
+        (click)="markAsFavoritePokemon(name)"
+        #button
+      >
+        <mat-icon [ngClass]="{ isFavorite: name === favPkmNameString }"
+          >favorite</mat-icon
+        >
+      </button>
+    </div>
+    <small class="center" *ngIf="name === favPkmNameString"
+      >Este es tu pokémon favorito</small
     >
-      <mat-icon>favorite</mat-icon>
-    </button>
-    <table>
-      <tr>
-        <th>Altura</th>
-        <th>Peso</th>
-      </tr>
-      <tr>
-        <td>"{{ pokemonDetail.height / 10 }}" m.</td>
-        <td>"{{ pokemonDetail.weight / 10 }}" kg.</td>
-      </tr>
-    </table>
-    <table>
-      <tr>
-        <th colspan="2">Habilidades</th>
-      </tr>
-      <tr>
-        <td>{{ pokemonDetail.abilities[0].ability.name | titlecase }}</td>
-        <td>
-          {{ pokemonDetail.abilities[1].ability.name | titlecase }}
-          <small>Habilidad oculta</small>
-        </td>
-      </tr>
-    </table>
+    <br />
+    <div class="div-table">
+      <table>
+        <tr>
+          <th>Altura</th>
+          <th>Peso</th>
+        </tr>
+        <tr>
+          <td>{{ pokemonDetail.height / 10 | number : "1.2-2" }} m.</td>
+          <td>{{ pokemonDetail.weight / 10 | number : "1.2-2" }} kg.</td>
+        </tr>
+      </table>
+    </div>
+    <br />
+    <div class="div-table">
+      <table>
+        <tr>
+          <th colspan="2">Habilidades</th>
+        </tr>
+        <tr>
+          <td>{{ pokemonDetail.abilities[0].ability.name | titlecase }}</td>
+          <td>
+            {{ pokemonDetail.abilities[1].ability.name | titlecase }}
+          </td>
+        </tr>
+        <tr>
+          <td></td>
+          <td><small>Habilidad oculta</small></td>
+        </tr>
+      </table>
+    </div>
   </mat-card-content>
 </mat-card>
 

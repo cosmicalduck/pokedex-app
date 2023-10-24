@@ -11,3 +11,8 @@
   padding-right: 60px;
   padding-top: 78px;
 }
+
+.summary-table-div {
+  display: flex;
+  justify-content: center;
+}
