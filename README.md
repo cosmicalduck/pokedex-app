@@ -37,14 +37,14 @@ Esta aplicación hace uso de PokéAPI[^1] para poder obtener la información de 
 
 3. Instalar las dependencias del proyecto con el comando:
 
-  `npm install`
+   `npm install`
 
 4. Una vez que las dependencias se hayan instalado, iniciar JSON server con el comando:
 
-  `json-server --watch db.json`
+   `json-server --watch db.json`
 
 5. Abrir otra terminal y ejecutar el comando:
 
-  `ng serve --o`
+   `ng serve --o`
 
 Este comando abrirá la aplicación en el navegador que se posea por defecto.
