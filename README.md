@@ -1,6 +1,6 @@
 # Pokedex App
 
-![pokedex](https://github.com/cosmicalduck/pokedex-app/assets/43730688/259aa5aa-3d17-4da8-8fa3-e73e238f41be)
+<img src="https://github.com/cosmicalduck/pokedex-app/assets/43730688/259aa5aa-3d17-4da8-8fa3-e73e238f41be" alt="app view" width="200"/>
 
 ## Información del proyecto
 
