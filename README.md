@@ -48,3 +48,14 @@ Esta aplicación hace uso de PokéAPI[^1] para poder obtener la información de 
    `ng serve --o`
 
 Este comando abrirá la aplicación en el navegador que se posea por defecto.
+
+## Forkear/Bifurcar Proyecto
+
+Si se desea realizar mejoras o trabajar con este proyecto como base. Se recomienda hacer una bifurcación de este proyecto y después clonarlo a su equipo. Para esto se debe:
+
+1. Hacer click en el botón "Fork" que se encuentra en la parte superior de este repositorio
+![fork](https://github.com/cosmicalduck/pokedex-app/assets/43730688/9aab5121-86a3-47b3-af5d-e7dfbbb33bb8)
+
+2. Hacer click en "+ Create a new fork"
+
+3. Ir al repositorio bifurcado y clonarlo
