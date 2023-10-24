@@ -1,27 +1,45 @@
-# PokemonListing
+# Pokedex App
 
-This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 16.2.6.
+![pokedex](https://github.com/cosmicalduck/pokedex-app/assets/43730688/259aa5aa-3d17-4da8-8fa3-e73e238f41be)
 
-## Development server
+## Información del proyecto
 
-Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The application will automatically reload if you change any of the source files.
+La siguiente aplicación consiste en una Pokedex, en donde se muestra un listado filtrable y páginado de todos los Pokémons existentes, pudiendo seleccionar un Pokémon del listado para poder conocer sus detalles. Es posible ordenar los Pokémons que se muestran en la tabla en orden alfabético tanto creciente como decreciente. De igual modo, en la parte inferior de la página se posee una tabla que indica la cantidad de Pokémons que inician con cada letra del abecedario, la cual es expandibe, para conocer el nombre de todos los Pokémons que inician con una cierta letra.
 
-## Code scaffolding
+De la misma forma, es posible seleccionar un Pokémon como favorito y visualizar su información rápidamente mediante el botón de "Pokémon favorito" que se encuentra en el header de la página. Dado que este proyecto hace uso de JSON Server, dicha información persistirá sin importar si el proyecto se despliega más de una vez.
 
-Run `ng generate component component-name` to generate a new component. You can also use `ng generate directive|pipe|service|class|guard|interface|enum|module`.
+Esta aplicación hace uso de PokéAPI[^1] para poder obtener la información de todos los Pokémons que muesta. 
 
-## Build
+[^1]: API RESTFul de Pokémon que entrega información sobre Pokémons de los juegos principales [Sitio](https://pokeapi.co/)
 
-Run `ng build` to build the project. The build artifacts will be stored in the `dist/` directory.
 
-## Running unit tests
+## Desplegar proyecto
 
-Run `ng test` to execute the unit tests via [Karma](https://karma-runner.github.io).
+### Requisitos
 
-## Running end-to-end tests
+1. Tener Node.js instalado (versión 16 o superior)
+   
+   [Página oficial de Node.js para descargar](https://nodejs.org/en)
 
-Run `ng e2e` to execute the end-to-end tests via a platform of your choice. To use this command, you need to first add a package that implements end-to-end testing capabilities.
+2. Tener Angular CLI instalado
+   [Página oficial de Angular para instalar Angular CLI](https://angular.io/guide/setup-local)
 
-## Further help
+### Desplegando aplicación de forma local
 
-To get more help on the Angular CLI use `ng help` or go check out the [Angular CLI Overview and Command Reference](https://angular.io/cli) page.
+1. Descargar el archivo .zip del repositorio y extraerlo, o clonarlo[^2] utilizando el comando:
+   
+   `git clone https://github.com/cosmicalduck/pokedex-app.git`
+
+[^2]: Para clonar el proyecto, es necesario tener instalado git en el equipo. [Página oficial de Git para descargar](https://git-scm.com/)
+
+2. Abrir una terminal y posicionarse en la carpeta del repositorio
+
+3. Instalar las dependencias del proyecto con el comando:
+  `npm install`
+
+4. Una vez que las dependencias se hayan instalado, iniciar JSON server con el comando:
+  `json-server --watch db.json`
+
+5. Abrir otra terminal y ejecutar el comando:
+  `ng serve --o`
+Este comando abrirá la aplicación en el navegador que se posea por defecto.
