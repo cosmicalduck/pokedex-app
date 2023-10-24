@@ -22,6 +22,7 @@ Esta aplicación hace uso de PokéAPI[^1] para poder obtener la información de 
    [Página oficial de Node.js para descargar](https://nodejs.org/en)
 
 2. Tener Angular CLI instalado
+
    [Página oficial de Angular para instalar Angular CLI](https://angular.io/guide/setup-local)
 
 ### Desplegando aplicación de forma local
@@ -35,11 +36,15 @@ Esta aplicación hace uso de PokéAPI[^1] para poder obtener la información de 
 2. Abrir una terminal y posicionarse en la carpeta del repositorio
 
 3. Instalar las dependencias del proyecto con el comando:
+
   `npm install`
 
 4. Una vez que las dependencias se hayan instalado, iniciar JSON server con el comando:
+
   `json-server --watch db.json`
 
 5. Abrir otra terminal y ejecutar el comando:
+
   `ng serve --o`
+
 Este comando abrirá la aplicación en el navegador que se posea por defecto.
